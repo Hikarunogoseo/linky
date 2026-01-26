@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue Backlinks SEO - Coinaute Agency</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 15px auto;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        .contact-info a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        .controls {
+            padding: 30px 40px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 10px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .search-bar {
+            grid-column: 1 / -1;
+        }
+
+        .search-bar input {
+            width: 100%;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2em;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        .stat-card .label {
+            font-size: 0.85em;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .catalog {
+            padding: 40px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #64748b;
+            font-size: 1.2em;
+        }
+
+        .site-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 25px;
+        }
+
+        .site-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .site-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #3b82f6;
+        }
+
+        .site-card.premium {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+        }
+
+        .premium-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f59e0b;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .site-name {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .site-url {
+            color: #3b82f6;
+            text-decoration: none;
+            font-size: 0.9em;
+            display: block;
+            margin-bottom: 15px;
+            word-break: break-all;
+        }
+
+        .site-url:hover {
+            text-decoration: underline;
+        }
+
+        .site-meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .meta-item {
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .meta-label {
+            font-size: 0.75em;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .meta-value {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.95em;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .tag {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .tag.category {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .niche-selector {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+
+        .niche-selector label {
+            display: block;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .niche-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .niche-btn {
+            padding: 6px 12px;
+            border: 2px solid #cbd5e1;
+            background: white;
+            border-radius: 6px;
+            font-size: 0.8em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .niche-btn:hover {
+            border-color: #3b82f6;
+        }
+
+        .niche-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        .price {
+            font-size: 2em;
+            font-weight: 800;
+            color: #10b981;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .price-note {
+            text-align: center;
+            font-size: 0.8em;
+            color: #64748b;
+            margin-top: -10px;
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            width: 100%;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            background: #2563eb;
+            transform: scale(1.02);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            color: #64748b;
+        }
+
+        .no-results h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .site-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                padding: 20px;
+            }
+            
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .niche-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Premium SEO Backlinks Catalog</h1>
+            <p>Boost your visibility with quality backlinks for General, Casino, Crypto, Forex, CBD, Dating & Erotic. All our links are DoFollow and published within 3-5 days.</p>
+            <div class="contact-info">
+                📧 <a href="mailto:links@coinaute.com">links@coinaute.com</a> | 
+                💬 <a href="https://wa.me/3364423422" target="_blank">WhatsApp</a> |
+                🌐 <a href="https://en.agency.coinaute.com/" target="_blank">Website</a>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="filters">
+                <div class="filter-group search-bar">
+                    <label>🔍 Rechercher un site</label>
+                    <input type="text" id="searchInput" placeholder="Nom du site ou catégorie...">
+                </div>
+                
+                <div class="filter-group">
+                    <label>🌍 Pays</label>
+                    <select id="countryFilter">
+                        <option value="">Tous les pays</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>🗣️ Langue</label>
+                    <select id="languageFilter">
+                        <option value="">Toutes les langues</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>🎯 Catégorie</label>
+                    <select id="categoryFilter">
+                        <option value="">Toutes les catégories</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>🎲 Niche</label>
+                    <select id="nicheFilter">
+                        <option value="general">General</option>
+                        <option value="casino">Casino</option>
+                        <option value="crypto">Crypto</option>
+                        <option value="loan">Loan/Forex</option>
+                        <option value="cbd">CBD</option>
+                        <option value="dating">Dating</option>
+                        <option value="erotic">Erotic</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>💰 Prix max</label>
+                    <input type="number" id="priceFilter" placeholder="Ex: 500">
+                </div>
+
+                <div class="filter-group">
+                    <label>📊 DR min</label>
+                    <input type="number" id="drFilter" placeholder="Ex: 30">
+                </div>
+                
+                <div class="filter-group">
+                    <label>📈 Trier par</label>
+                    <select id="sortBy">
+                        <option value="price-asc">Prix (croissant)</option>
+                        <option value="price-desc">Prix (décroissant)</option>
+                        <option value="dr-desc">DR (décroissant)</option>
+                        <option value="traffic-desc">Trafic (décroissant)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="number" id="totalSites">-</div>
+                    <div class="label">Sites disponibles</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="avgPrice">-</div>
+                    <div class="label">Prix moyen</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="countriesCount">-</div>
+                    <div class="label">Pays couverts</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="catalog">
+            <div class="loading">⏳ Chargement du catalogue...</div>
+            <div class="site-grid" id="siteGrid" style="display: none;"></div>
+            <div class="no-results" id="noResults" style="display: none;">
+                <h3>😕 Aucun résultat</h3>
+                <p>Essayez de modifier vos filtres</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const PUBLISHED_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRaEvloOgKjPSMotYn430yp_Q5h5HIxfXTvI2bWHWy97GgRy7a0IZ_GijcXZwVLJaTMCTEhRIYH_LSP/pub?output=csv';
+        
+        let allSites = [];
+        let filteredSites = [];
+        let selectedNiche = 'general';
+
+        async function loadData() {
+            try {
+                const url = PUBLISHED_CSV_URL;
+                
+                const response = await fetch(url);
+                const csvText = await response.text();
+                
+                const rows = parseCSV(csvText);
+                
+                allSites = rows.slice(1).map(row => {
+                    const priceGeneral = parseFloat(row[6]?.replace(/[^\d.]/g, '')) || 0;
+                    const priceCasino = parseFloat(row[7]?.replace(/[^\d.]/g, '')) || 0;
+                    const priceCrypto = parseFloat(row[8]?.replace(/[^\d.]/g, '')) || 0;
+                    const priceLoan = parseFloat(row[9]?.replace(/[^\d.]/g, '')) || 0;
+                    const priceCBD = parseFloat(row[10]?.replace(/[^\d.]/g, '')) || 0;
+                    const priceDating = parseFloat(row[11]?.replace(/[^\d.]/g, '')) || 0;
+                    const priceErotic = parseFloat(row[12]?.replace(/[^\d.]/g, '')) || 0;
+
+                    return {
+                        country: row[0] || 'US',
+                        language: row[1] || 'EN',
+                        media: row[2] || 'Site',
+                        category: row[3] || 'General',
+                        traffic: parseInt(row[4]?.replace(/\s/g, '')) || 0,
+                        dr: parseInt(row[5]) || 0,
+                        prices: {
+                            general: priceGeneral,
+                            casino: priceCasino,
+                            crypto: priceCrypto,
+                            loan: priceLoan,
+                            cbd: priceCBD,
+                            dating: priceDating,
+                            erotic: priceErotic
+                        },
+                        dofollow: row[13] || 'Yes',
+                        sponsored: row[14] || 'No',
+                        delay: row[15] || '5 days'
+                    };
+                }).filter(site => site.media && site.prices.general > 0);
+
+                populateFilters();
+                applyFilters();
+                updateStats();
+                
+                document.querySelector('.loading').style.display = 'none';
+                document.getElementById('siteGrid').style.display = 'grid';
+            } catch (error) {
+                console.error('Erreur:', error);
+                document.querySelector('.loading').innerHTML = 
+                    '❌ Erreur de chargement. Assurez-vous que le Google Sheet est publié.<br><br>' +
+                    '<strong>Instructions:</strong><br>1. Ouvrez votre Google Sheet<br>2. Fichier → Partager → Publier sur le Web<br>3. Choisissez "Feuille entière" et cliquez "Publier"';
+            }
+        }
+
+        function parseCSV(text) {
+            const rows = [];
+            let currentRow = [];
+            let currentField = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const nextChar = text[i + 1];
+
+                if (char === '"') {
+                    if (inQuotes && nextChar === '"') {
+                        currentField += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    currentRow.push(currentField);
+                    currentField = '';
+                } else if ((char === '\n' || char === '\r') && !inQuotes) {
+                    if (char === '\r' && nextChar === '\n') i++;
+                    currentRow.push(currentField);
+                    if (currentRow.length > 0) rows.push(currentRow);
+                    currentRow = [];
+                    currentField = '';
+                } else {
+                    currentField += char;
+                }
+            }
+
+            if (currentField || currentRow.length > 0) {
+                currentRow.push(currentField);
+                if (currentRow.length > 0) rows.push(currentRow);
+            }
+
+            return rows;
+        }
+
+        function populateFilters() {
+            const countries = [...new Set(allSites.map(s => s.country))].sort();
+            const languages = [...new Set(allSites.map(s => s.language))].sort();
+            const categories = [...new Set(allSites.map(s => s.category))].sort();
+
+            document.getElementById('countryFilter').innerHTML = 
+                '<option value="">Tous les pays</option>' +
+                countries.map(c => `<option value="${c}">${c}</option>`).join('');
+
+            document.getElementById('languageFilter').innerHTML = 
+                '<option value="">Toutes les langues</option>' +
+                languages.map(l => `<option value="${l}">${l}</option>`).join('');
+
+            document.getElementById('categoryFilter').innerHTML = 
+                '<option value="">Toutes les catégories</option>' +
+                categories.map(c => `<option value="${c}">${c}</option>`).join('');
+        }
+
+        function applyFilters() {
+            selectedNiche = document.getElementById('nicheFilter').value;
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const country = document.getElementById('countryFilter').value;
+            const language = document.getElementById('languageFilter').value;
+            const category = document.getElementById('categoryFilter').value;
+            const maxPrice = parseFloat(document.getElementById('priceFilter').value) || Infinity;
+            const minDR = parseFloat(document.getElementById('drFilter').value) || 0;
+            const sortBy = document.getElementById('sortBy').value;
+
+            filteredSites = allSites.filter(site => {
+                const currentPrice = site.prices[selectedNiche];
+                const matchSearch = !search || 
+                    site.media.toLowerCase().includes(search) || 
+                    site.category.toLowerCase().includes(search);
+                const matchCountry = !country || site.country === country;
+                const matchLanguage = !language || site.language === language;
+                const matchCategory = !category || site.category === category;
+                const matchPrice = currentPrice <= maxPrice;
+                const matchDR = site.dr >= minDR;
+
+                return matchSearch && matchCountry && matchLanguage && matchCategory && matchPrice && matchDR;
+            });
+
+            filteredSites.sort((a, b) => {
+                const priceA = a.prices[selectedNiche];
+                const priceB = b.prices[selectedNiche];
+                
+                switch(sortBy) {
+                    case 'price-asc': return priceA - priceB;
+                    case 'price-desc': return priceB - priceA;
+                    case 'dr-desc': return b.dr - a.dr;
+                    case 'traffic-desc': return b.traffic - a.traffic;
+                    default: return 0;
+                }
+            });
+
+            displaySites();
+        }
+
+        function displaySites() {
+            const grid = document.getElementById('siteGrid');
+            const noResults = document.getElementById('noResults');
+
+            if (filteredSites.length === 0) {
+                grid.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            grid.style.display = 'grid';
+            noResults.style.display = 'none';
+
+            grid.innerHTML = filteredSites.map(site => {
+                const currentPrice = site.prices[selectedNiche];
+                const isPremium = site.dr >= 50 || site.traffic >= 50000;
+                
+                return `
+                    <div class="site-card ${isPremium ? 'premium' : ''}">
+                        ${isPremium ? '<div class="premium-badge">⭐ Premium</div>' : ''}
+                        <div class="site-name">${site.media}</div>
+                        <a href="https://${site.media}" target="_blank" class="site-url">${site.media}</a>
+                        
+                        <div class="tags">
+                            <span class="tag category">${site.category}</span>
+                            <span class="tag">${site.language}</span>
+                            <span class="tag">${site.country}</span>
+                        </div>
+
+                        <div class="site-meta">
+                            <div class="meta-item">
+                                <div class="meta-label">DR Ahrefs</div>
+                                <div class="meta-value">${site.dr}</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-label">Trafic/mois</div>
+                                <div class="meta-value">${site.traffic.toLocaleString()}</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-label">DoFollow</div>
+                                <div class="meta-value">${site.dofollow}</div>
+                            </div>
+                            <div class="meta-item">
+                                <div class="meta-label">Délai</div>
+                                <div class="meta-value">${site.delay}</div>
+                            </div>
+                        </div>
+
+                        <div class="price">$${currentPrice}</div>
+                        <div class="price-note">Prix pour ${selectedNiche.charAt(0).toUpperCase() + selectedNiche.slice(1)}</div>
+                        
+                        <button class="cta-button" onclick="orderLink('${site.media}', ${currentPrice}, '${selectedNiche}')">
+                            Commander ce lien
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateStats() {
+            document.getElementById('totalSites').textContent = allSites.length;
+            
+            const prices = allSites.map(s => s.prices.general);
+            const avgPrice = prices.reduce((sum, p) => sum + p, 0) / prices.length;
+            document.getElementById('avgPrice').textContent = '$' + Math.round(avgPrice);
+            
+            const countries = new Set(allSites.map(s => s.country));
+            document.getElementById('countriesCount').textContent = countries.size;
+        }
+
+        function orderLink(siteName, price, niche) {
+            const subject = encodeURIComponent(`Commande backlink - ${siteName} (${niche})`);
+            const body = encodeURIComponent(`Bonjour,\n\nJe souhaite commander un backlink sur ${siteName}\n\nNiche: ${niche.charAt(0).toUpperCase() + niche.slice(1)}\nPrix: $${price}\n\nMerci de me recontacter.\n\nCordialement`);
+            window.location.href = `mailto:links@coinaute.com?subject=${subject}&body=${body}`;
+        }
+
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        document.getElementById('countryFilter').addEventListener('change', applyFilters);
+        document.getElementById('languageFilter').addEventListener('change', applyFilters);
+        document.getElementById('categoryFilter').addEventListener('change', applyFilters);
+        document.getElementById('nicheFilter').addEventListener('change', applyFilters);
+        document.getElementById('priceFilter').addEventListener('input', applyFilters);
+        document.getElementById('drFilter').addEventListener('input', applyFilters);
+        document.getElementById('sortBy').addEventListener('change', applyFilters);
+
+        loadData();
+    </script>
+</body>
+</html>
