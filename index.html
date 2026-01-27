@@ -487,7 +487,8 @@
 
         async function loadData() {
             try {
-                const url = PUBLISHED_CSV_URL;
+                // Utilisation d'un proxy CORS pour éviter les blocages
+                const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(PUBLISHED_CSV_URL)}`;
                 
                 const response = await fetch(url);
                 const csvText = await response.text();
