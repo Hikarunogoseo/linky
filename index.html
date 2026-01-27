@@ -380,13 +380,6 @@
                 </div>
                 
                 <div class="filter-group">
-                    <label>🗣️ Language</label>
-                    <select id="languageFilter">
-                        <option value="">All languages</option>
-                    </select>
-                </div>
-                
-                <div class="filter-group">
                     <label>🎯 Category</label>
                     <select id="categoryFilter">
                         <option value="">All categories</option>
@@ -587,12 +580,7 @@
         }
 
         function populateFilters(sites) {
-            const languages = [...new Set(sites.map(s => s.language))].sort();
             const categories = [...new Set(sites.map(s => s.category))].sort();
-
-            document.getElementById('languageFilter').innerHTML = 
-                '<option value="">All languages</option>' +
-                languages.map(l => `<option value="${l}">${l}</option>`).join('');
 
             document.getElementById('categoryFilter').innerHTML = 
                 '<option value="">All categories</option>' +
@@ -611,7 +599,6 @@
             
             selectedNiche = document.getElementById('nicheFilter').value;
             const search = document.getElementById('searchInput').value.toLowerCase();
-            const language = document.getElementById('languageFilter').value;
             const category = document.getElementById('categoryFilter').value;
             const maxPrice = parseFloat(document.getElementById('priceFilter').value) || Infinity;
             const minDR = parseFloat(document.getElementById('drFilter').value) || 0;
@@ -622,12 +609,11 @@
                 const matchSearch = !search || 
                     site.media.toLowerCase().includes(search) || 
                     site.category.toLowerCase().includes(search);
-                const matchLanguage = !language || site.language === language;
                 const matchCategory = !category || site.category === category;
                 const matchPrice = currentPrice <= maxPrice;
                 const matchDR = site.dr >= minDR;
 
-                return matchSearch && matchLanguage && matchCategory && matchPrice && matchDR;
+                return matchSearch && matchCategory && matchPrice && matchDR;
             });
 
             filteredSites.sort((a, b) => {
