@@ -479,7 +479,7 @@
     </div>
 
     <script>
-        const PUBLISHED_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRaEvloOgKjPSMotYn430yp_Q5h5HIxfXTvI2bWHWy97GgRy7a0IZ_GijcXZwVLJaTMCTEhRIYH_LSP/pub?output=csv';
+        const PUBLISHED_CSV_URL = 'https://docs.google.com/spreadsheets/d/1Wm9dw6b40Mc-kiQbjA_Q3iB52oPwX8_VJ7AZ93lz6cY/gviz/tq?tqx=out:csv&sheet=🇺🇸USA';
         
         let allSites = [];
         let filteredSites = [];
@@ -487,10 +487,13 @@
 
         async function loadData() {
             try {
-                // Utilisation d'un proxy CORS pour éviter les blocages
-                const url = `https://api.allorigins.win/raw?url=${encodeURIComponent(PUBLISHED_CSV_URL)}`;
+                // Méthode alternative avec l'API Google Visualization
+                const response = await fetch(PUBLISHED_CSV_URL);
                 
-                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Erreur de chargement');
+                }
+                
                 const csvText = await response.text();
                 
                 const rows = parseCSV(csvText);
