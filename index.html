@@ -479,7 +479,8 @@
     </div>
 
     <script>
-        const PUBLISHED_CSV_URL = 'https://docs.google.com/spreadsheets/d/1Wm9dw6b40Mc-kiQbjA_Q3iB52oPwX8_VJ7AZ93lz6cY/gviz/tq?tqx=out:csv&sheet=🇺🇸USA';
+        const SHEET_ID = '1Wm9dw6b40Mc-kiQbjA_Q3iB52oPwX8_VJ7AZ93lz6cY';
+        const SHEET_TABS = ['🇺🇸USA', '🇬🇧 UK', '🇩🇪 DE', '🇫🇷 FR', '🇪🇸ES', '🇮🇹IT', '🇨🇦 CA', '🇦🇺 AU', '🇳🇱 NL', '🇮🇳IN', '🇵🇱PL', '🇺🇦UK', '🇷🇴 RO', '🇧🇷 BR', '🇹🇷TR', '🇵🇹PT', '🇨🇳CN', '🇮🇪IE', '🇯🇵 JA', '🇨🇿CZ', '🇦🇪 UAE', '🇿🇦SA', '🇸🇬 SG'];
         
         let allSites = [];
         let filteredSites = [];
@@ -487,14 +488,17 @@
 
         async function loadData() {
             try {
-                // Méthode alternative avec l'API Google Visualization
-                const response = await fetch(PUBLISHED_CSV_URL);
+                document.querySelector('.loading').innerHTML = '⏳ Chargement de tous les pays...';
                 
-                if (!response.ok) {
-                    throw new Error('Erreur de chargement');
-                }
-                
-                const csvText = await response.text();
+                // Charger tous les onglets
+                for (const tab of SHEET_TABS) {
+                    try {
+                        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tab)}`;
+                        const response = await fetch(url);
+                        
+                        if (!response.ok) continue;
+                        
+                        const csvText = await response.text();
                 
                 const rows = parseCSV(csvText);
                 
