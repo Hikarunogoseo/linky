@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogue Backlinks SEO - Coinaute Agency</title>
+    <title>Premium SEO Backlinks Catalog - Coinaute Agency</title>
     <style>
         * {
             margin: 0;
@@ -265,49 +265,6 @@
             color: #1e40af;
         }
 
-        .niche-selector {
-            margin: 15px 0;
-            padding: 15px;
-            background: #f1f5f9;
-            border-radius: 8px;
-        }
-
-        .niche-selector label {
-            display: block;
-            font-size: 0.85em;
-            font-weight: 600;
-            color: #475569;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-
-        .niche-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .niche-btn {
-            padding: 6px 12px;
-            border: 2px solid #cbd5e1;
-            background: white;
-            border-radius: 6px;
-            font-size: 0.8em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .niche-btn:hover {
-            border-color: #3b82f6;
-        }
-
-        .niche-btn.active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-
         .price {
             font-size: 2em;
             font-weight: 800;
@@ -371,10 +328,6 @@
             .filters {
                 grid-template-columns: 1fr;
             }
-
-            .niche-buttons {
-                flex-direction: column;
-            }
         }
     </style>
 </head>
@@ -393,28 +346,50 @@
         <div class="controls">
             <div class="filters">
                 <div class="filter-group search-bar">
-                    <label>🔍 Rechercher un site</label>
-                    <input type="text" id="searchInput" placeholder="Nom du site ou catégorie...">
+                    <label>🔍 Search</label>
+                    <input type="text" id="searchInput" placeholder="Site name or category...">
                 </div>
                 
                 <div class="filter-group">
-                    <label>🌍 Pays</label>
+                    <label>🌍 Country</label>
                     <select id="countryFilter">
-                        <option value="">Tous les pays</option>
+                        <option value="United State">🇺🇸 United States (Default)</option>
+                        <option value="United Kingdom">🇬🇧 United Kingdom</option>
+                        <option value="Germany">🇩🇪 Germany</option>
+                        <option value="France">🇫🇷 France</option>
+                        <option value="Spain">🇪🇸 Spain</option>
+                        <option value="Italy">🇮🇹 Italy</option>
+                        <option value="Canada">🇨🇦 Canada</option>
+                        <option value="Australia">🇦🇺 Australia</option>
+                        <option value="Netherlands">🇳🇱 Netherlands</option>
+                        <option value="India">🇮🇳 India</option>
+                        <option value="Poland">🇵🇱 Poland</option>
+                        <option value="Ukraine">🇺🇦 Ukraine</option>
+                        <option value="Romania">🇷🇴 Romania</option>
+                        <option value="Brazil">🇧🇷 Brazil</option>
+                        <option value="Turkey">🇹🇷 Turkey</option>
+                        <option value="Portugal">🇵🇹 Portugal</option>
+                        <option value="China">🇨🇳 China</option>
+                        <option value="Ireland">🇮🇪 Ireland</option>
+                        <option value="Japan">🇯🇵 Japan</option>
+                        <option value="Czech Republic">🇨🇿 Czech Republic</option>
+                        <option value="UAE">🇦🇪 UAE</option>
+                        <option value="South Africa">🇿🇦 South Africa</option>
+                        <option value="Singapore">🇸🇬 Singapore</option>
                     </select>
                 </div>
                 
                 <div class="filter-group">
-                    <label>🗣️ Langue</label>
+                    <label>🗣️ Language</label>
                     <select id="languageFilter">
-                        <option value="">Toutes les langues</option>
+                        <option value="">All languages</option>
                     </select>
                 </div>
                 
                 <div class="filter-group">
-                    <label>🎯 Catégorie</label>
+                    <label>🎯 Category</label>
                     <select id="categoryFilter">
-                        <option value="">Toutes les catégories</option>
+                        <option value="">All categories</option>
                     </select>
                 </div>
 
@@ -432,22 +407,22 @@
                 </div>
                 
                 <div class="filter-group">
-                    <label>💰 Prix max</label>
-                    <input type="number" id="priceFilter" placeholder="Ex: 500">
+                    <label>💰 Max Price</label>
+                    <input type="number" id="priceFilter" placeholder="e.g., 500">
                 </div>
 
                 <div class="filter-group">
-                    <label>📊 DR min</label>
-                    <input type="number" id="drFilter" placeholder="Ex: 30">
+                    <label>📊 Min DR</label>
+                    <input type="number" id="drFilter" placeholder="e.g., 30">
                 </div>
                 
                 <div class="filter-group">
-                    <label>📈 Trier par</label>
+                    <label>📈 Sort by</label>
                     <select id="sortBy">
-                        <option value="price-asc">Prix (croissant)</option>
-                        <option value="price-desc">Prix (décroissant)</option>
-                        <option value="dr-desc">DR (décroissant)</option>
-                        <option value="traffic-desc">Trafic (décroissant)</option>
+                        <option value="price-asc">Price (Low to High)</option>
+                        <option value="price-desc">Price (High to Low)</option>
+                        <option value="dr-desc">DR (High to Low)</option>
+                        <option value="traffic-desc">Traffic (High to Low)</option>
                     </select>
                 </div>
             </div>
@@ -455,54 +430,85 @@
             <div class="stats">
                 <div class="stat-card">
                     <div class="number" id="totalSites">-</div>
-                    <div class="label">Sites disponibles</div>
+                    <div class="label">Available Sites</div>
                 </div>
                 <div class="stat-card">
                     <div class="number" id="avgPrice">-</div>
-                    <div class="label">Prix moyen</div>
+                    <div class="label">Average Price</div>
                 </div>
                 <div class="stat-card">
                     <div class="number" id="countriesCount">-</div>
-                    <div class="label">Pays couverts</div>
+                    <div class="label">Countries</div>
                 </div>
             </div>
         </div>
 
         <div class="catalog">
-            <div class="loading">⏳ Chargement du catalogue...</div>
+            <div class="loading">⏳ Loading US catalog...</div>
             <div class="site-grid" id="siteGrid" style="display: none;"></div>
             <div class="no-results" id="noResults" style="display: none;">
-                <h3>😕 Aucun résultat</h3>
-                <p>Essayez de modifier vos filtres</p>
+                <h3>😕 No results found</h3>
+                <p>Try adjusting your filters</p>
             </div>
         </div>
     </div>
 
     <script>
         const SHEET_ID = '1Wm9dw6b40Mc-kiQbjA_Q3iB52oPwX8_VJ7AZ93lz6cY';
-        const SHEET_TABS = ['🇺🇸USA', '🇬🇧 UK', '🇩🇪 DE', '🇫🇷 FR', '🇪🇸ES', '🇮🇹IT', '🇨🇦 CA', '🇦🇺 AU', '🇳🇱 NL', '🇮🇳IN', '🇵🇱PL', '🇺🇦UK', '🇷🇴 RO', '🇧🇷 BR', '🇹🇷TR', '🇵🇹PT', '🇨🇳CN', '🇮🇪IE', '🇯🇵 JA', '🇨🇿CZ', '🇦🇪 UAE', '🇿🇦SA', '🇸🇬 SG'];
         
-        let allSites = [];
+        // Mapping pays vers onglets
+        const COUNTRY_TO_TAB = {
+            'United State': '🇺🇸USA',
+            'United Kingdom': '🇬🇧 UK',
+            'Germany': '🇩🇪 DE',
+            'France': '🇫🇷 FR',
+            'Spain': '🇪🇸ES',
+            'Italy': '🇮🇹IT',
+            'Canada': '🇨🇦 CA',
+            'Australia': '🇦🇺 AU',
+            'Netherlands': '🇳🇱 NL',
+            'India': '🇮🇳IN',
+            'Poland': '🇵🇱PL',
+            'Ukraine': '🇺🇦UK',
+            'Romania': '🇷🇴 RO',
+            'Brazil': '🇧🇷 BR',
+            'Turkey': '🇹🇷TR',
+            'Portugal': '🇵🇹PT',
+            'China': '🇨🇳CN',
+            'Ireland': '🇮🇪IE',
+            'Japan': '🇯🇵 JA',
+            'Czech Republic': '🇨🇿CZ',
+            'UAE': '🇦🇪 UAE',
+            'South Africa': '🇿🇦SA',
+            'Singapore': '🇸🇬 SG'
+        };
+        
+        let allSites = {};
+        let currentCountry = 'United State';
         let filteredSites = [];
         let selectedNiche = 'general';
 
-        async function loadData() {
+        async function loadCountryData(country) {
+            if (allSites[country]) {
+                return allSites[country];
+            }
+
+            const tab = COUNTRY_TO_TAB[country];
+            if (!tab) return [];
+
             try {
-                document.querySelector('.loading').innerHTML = '⏳ Chargement de tous les pays...';
+                document.querySelector('.loading').style.display = 'block';
+                document.querySelector('.loading').innerHTML = `⏳ Loading ${country}...`;
                 
-                // Charger tous les onglets
-                for (const tab of SHEET_TABS) {
-                    try {
-                        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tab)}`;
-                        const response = await fetch(url);
-                        
-                        if (!response.ok) continue;
-                        
-                        const csvText = await response.text();
+                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(tab)}`;
+                const response = await fetch(url);
                 
+                if (!response.ok) throw new Error('Loading failed');
+                
+                const csvText = await response.text();
                 const rows = parseCSV(csvText);
                 
-                allSites = rows.slice(1).map(row => {
+                const sites = rows.slice(1).map(row => {
                     const priceGeneral = parseFloat(row[6]?.replace(/[^\d.]/g, '')) || 0;
                     const priceCasino = parseFloat(row[7]?.replace(/[^\d.]/g, '')) || 0;
                     const priceCrypto = parseFloat(row[8]?.replace(/[^\d.]/g, '')) || 0;
@@ -512,7 +518,7 @@
                     const priceErotic = parseFloat(row[12]?.replace(/[^\d.]/g, '')) || 0;
 
                     return {
-                        country: row[0] || 'US',
+                        country: row[0] || country,
                         language: row[1] || 'EN',
                         media: row[2] || 'Site',
                         category: row[3] || 'General',
@@ -532,18 +538,12 @@
                         delay: row[15] || '5 days'
                     };
                 }).filter(site => site.media && site.prices.general > 0);
-
-                populateFilters();
-                applyFilters();
-                updateStats();
                 
-                document.querySelector('.loading').style.display = 'none';
-                document.getElementById('siteGrid').style.display = 'grid';
+                allSites[country] = sites;
+                return sites;
             } catch (error) {
-                console.error('Erreur:', error);
-                document.querySelector('.loading').innerHTML = 
-                    '❌ Erreur de chargement. Assurez-vous que le Google Sheet est publié.<br><br>' +
-                    '<strong>Instructions:</strong><br>1. Ouvrez votre Google Sheet<br>2. Fichier → Partager → Publier sur le Web<br>3. Choisissez "Feuille entière" et cliquez "Publier"';
+                console.error(`Error loading ${country}:`, error);
+                return [];
             }
         }
 
@@ -586,46 +586,48 @@
             return rows;
         }
 
-        function populateFilters() {
-            const countries = [...new Set(allSites.map(s => s.country))].sort();
-            const languages = [...new Set(allSites.map(s => s.language))].sort();
-            const categories = [...new Set(allSites.map(s => s.category))].sort();
-
-            document.getElementById('countryFilter').innerHTML = 
-                '<option value="">Tous les pays</option>' +
-                countries.map(c => `<option value="${c}">${c}</option>`).join('');
+        function populateFilters(sites) {
+            const languages = [...new Set(sites.map(s => s.language))].sort();
+            const categories = [...new Set(sites.map(s => s.category))].sort();
 
             document.getElementById('languageFilter').innerHTML = 
-                '<option value="">Toutes les langues</option>' +
+                '<option value="">All languages</option>' +
                 languages.map(l => `<option value="${l}">${l}</option>`).join('');
 
             document.getElementById('categoryFilter').innerHTML = 
-                '<option value="">Toutes les catégories</option>' +
+                '<option value="">All categories</option>' +
                 categories.map(c => `<option value="${c}">${c}</option>`).join('');
         }
 
-        function applyFilters() {
+        async function applyFilters() {
+            const newCountry = document.getElementById('countryFilter').value;
+            
+            if (newCountry !== currentCountry) {
+                currentCountry = newCountry;
+                await loadCountryData(currentCountry);
+            }
+
+            const sites = allSites[currentCountry] || [];
+            
             selectedNiche = document.getElementById('nicheFilter').value;
             const search = document.getElementById('searchInput').value.toLowerCase();
-            const country = document.getElementById('countryFilter').value;
             const language = document.getElementById('languageFilter').value;
             const category = document.getElementById('categoryFilter').value;
             const maxPrice = parseFloat(document.getElementById('priceFilter').value) || Infinity;
             const minDR = parseFloat(document.getElementById('drFilter').value) || 0;
             const sortBy = document.getElementById('sortBy').value;
 
-            filteredSites = allSites.filter(site => {
+            filteredSites = sites.filter(site => {
                 const currentPrice = site.prices[selectedNiche];
                 const matchSearch = !search || 
                     site.media.toLowerCase().includes(search) || 
                     site.category.toLowerCase().includes(search);
-                const matchCountry = !country || site.country === country;
                 const matchLanguage = !language || site.language === language;
                 const matchCategory = !category || site.category === category;
                 const matchPrice = currentPrice <= maxPrice;
                 const matchDR = site.dr >= minDR;
 
-                return matchSearch && matchCountry && matchLanguage && matchCategory && matchPrice && matchDR;
+                return matchSearch && matchLanguage && matchCategory && matchPrice && matchDR;
             });
 
             filteredSites.sort((a, b) => {
@@ -642,11 +644,15 @@
             });
 
             displaySites();
+            updateStats();
         }
 
         function displaySites() {
             const grid = document.getElementById('siteGrid');
             const noResults = document.getElementById('noResults');
+            const loading = document.querySelector('.loading');
+
+            loading.style.display = 'none';
 
             if (filteredSites.length === 0) {
                 grid.style.display = 'none';
@@ -679,7 +685,7 @@
                                 <div class="meta-value">${site.dr}</div>
                             </div>
                             <div class="meta-item">
-                                <div class="meta-label">Trafic/mois</div>
+                                <div class="meta-label">Traffic/month</div>
                                 <div class="meta-value">${site.traffic.toLocaleString()}</div>
                             </div>
                             <div class="meta-item">
@@ -687,16 +693,16 @@
                                 <div class="meta-value">${site.dofollow}</div>
                             </div>
                             <div class="meta-item">
-                                <div class="meta-label">Délai</div>
+                                <div class="meta-label">Delay</div>
                                 <div class="meta-value">${site.delay}</div>
                             </div>
                         </div>
 
                         <div class="price">$${currentPrice}</div>
-                        <div class="price-note">Prix pour ${selectedNiche.charAt(0).toUpperCase() + selectedNiche.slice(1)}</div>
+                        <div class="price-note">Price for ${selectedNiche.charAt(0).toUpperCase() + selectedNiche.slice(1)}</div>
                         
                         <button class="cta-button" onclick="orderLink('${site.media}', ${currentPrice}, '${selectedNiche}')">
-                            Commander ce lien
+                            Order This Link
                         </button>
                     </div>
                 `;
@@ -704,19 +710,19 @@
         }
 
         function updateStats() {
-            document.getElementById('totalSites').textContent = allSites.length;
+            const sites = allSites[currentCountry] || [];
+            document.getElementById('totalSites').textContent = sites.length;
             
-            const prices = allSites.map(s => s.prices.general);
-            const avgPrice = prices.reduce((sum, p) => sum + p, 0) / prices.length;
+            const prices = sites.map(s => s.prices.general);
+            const avgPrice = prices.length > 0 ? prices.reduce((sum, p) => sum + p, 0) / prices.length : 0;
             document.getElementById('avgPrice').textContent = '$' + Math.round(avgPrice);
             
-            const countries = new Set(allSites.map(s => s.country));
-            document.getElementById('countriesCount').textContent = countries.size;
+            document.getElementById('countriesCount').textContent = Object.keys(allSites).length;
         }
 
         function orderLink(siteName, price, niche) {
-            const subject = encodeURIComponent(`Commande backlink - ${siteName} (${niche})`);
-            const body = encodeURIComponent(`Bonjour,\n\nJe souhaite commander un backlink sur ${siteName}\n\nNiche: ${niche.charAt(0).toUpperCase() + niche.slice(1)}\nPrix: $${price}\n\nMerci de me recontacter.\n\nCordialement`);
+            const subject = encodeURIComponent(`Backlink Order - ${siteName} (${niche})`);
+            const body = encodeURIComponent(`Hello,\n\nI would like to order a backlink on ${siteName}\n\nNiche: ${niche.charAt(0).toUpperCase() + niche.slice(1)}\nPrice: $${price}\n\nPlease contact me.\n\nBest regards`);
             window.location.href = `mailto:links@coinaute.com?subject=${subject}&body=${body}`;
         }
 
@@ -729,7 +735,10 @@
         document.getElementById('drFilter').addEventListener('input', applyFilters);
         document.getElementById('sortBy').addEventListener('change', applyFilters);
 
-        loadData();
+        loadCountryData('United State').then(() => {
+            populateFilters(allSites['United State']);
+            applyFilters();
+        });
     </script>
 </body>
 </html>
