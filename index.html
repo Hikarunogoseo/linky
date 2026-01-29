@@ -312,6 +312,43 @@
             margin-bottom: 10px;
         }
 
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding: 20px;
+        }
+
+        .pagination-btn {
+            padding: 12px 24px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .pagination-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .pagination-info {
+            font-weight: 600;
+            color: #475569;
+            font-size: 1em;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8em;
@@ -439,6 +476,11 @@
         <div class="catalog">
             <div class="loading">⏳ Loading US catalog...</div>
             <div class="site-grid" id="siteGrid" style="display: none;"></div>
+            <div class="pagination" id="pagination" style="display: none;">
+                <button class="pagination-btn" id="prevBtn" onclick="changePage(-1)">← Previous</button>
+                <span class="pagination-info" id="pageInfo">Page 1</span>
+                <button class="pagination-btn" id="nextBtn" onclick="changePage(1)">Next →</button>
+            </div>
             <div class="no-results" id="noResults" style="display: none;">
                 <h3>😕 No results found</h3>
                 <p>Try adjusting your filters</p>
@@ -480,6 +522,8 @@
         let currentCountry = 'United State';
         let filteredSites = [];
         let selectedNiche = 'general';
+        let currentPage = 1;
+        const SITES_PER_PAGE = 20;
 
         async function loadCountryData(country) {
             if (allSites[country]) {
@@ -650,7 +694,8 @@
             noResults.style.display = 'none';
 
             grid.innerHTML = filteredSites.map(site => {
-                const currentPrice = site.prices[selectedNiche];
+                const priceGeneral = site.prices.general;
+                const priceCasino = site.prices.casino;
                 const isPremium = site.dr >= 50 || site.traffic >= 50000;
                 
                 return `
@@ -684,10 +729,13 @@
                             </div>
                         </div>
 
-                        <div class="price">$${currentPrice}</div>
-                        <div class="price-note">Price for ${selectedNiche.charAt(0).toUpperCase() + selectedNiche.slice(1)}</div>
+                        <div class="price">${priceGeneral}</div>
+                        <div class="price-note">Price for General</div>
                         
-                        <button class="cta-button" onclick="orderLink('${site.media}', ${currentPrice}, '${selectedNiche}')">
+                        <div class="price" style="font-size: 1.5em; margin-top: 5px;">${priceCasino}</div>
+                        <div class="price-note" style="margin-top: -10px;">Price for Casino</div>
+                        
+                        <button class="cta-button" onclick="orderLink('${site.media}', ${priceGeneral}, ${priceCasino})">
                             Order This Link
                         </button>
                     </div>
@@ -706,15 +754,14 @@
             document.getElementById('countriesCount').textContent = Object.keys(allSites).length;
         }
 
-        function orderLink(siteName, price, niche) {
-            const subject = encodeURIComponent(`Backlink Order - ${siteName} (${niche})`);
-            const body = encodeURIComponent(`Hello,\n\nI would like to order a backlink on ${siteName}\n\nNiche: ${niche.charAt(0).toUpperCase() + niche.slice(1)}\nPrice: $${price}\n\nPlease contact me.\n\nBest regards`);
+        function orderLink(siteName, priceGeneral, priceCasino) {
+            const subject = encodeURIComponent(`Backlink Order - ${siteName}`);
+            const body = encodeURIComponent(`Hello,\n\nI would like to order a backlink on ${siteName}\n\nPrice General: ${priceGeneral}\nPrice Casino: ${priceCasino}\n\nPlease contact me.\n\nBest regards`);
             window.location.href = `mailto:links@coinaute.com?subject=${subject}&body=${body}`;
         }
 
         document.getElementById('searchInput').addEventListener('input', applyFilters);
         document.getElementById('countryFilter').addEventListener('change', applyFilters);
-        document.getElementById('languageFilter').addEventListener('change', applyFilters);
         document.getElementById('categoryFilter').addEventListener('change', applyFilters);
         document.getElementById('nicheFilter').addEventListener('change', applyFilters);
         document.getElementById('priceFilter').addEventListener('input', applyFilters);
